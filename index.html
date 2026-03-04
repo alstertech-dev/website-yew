@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Yew App</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        font-size: 16px;
+        background: #f5f8fa;
+        padding-top: 5em;
+      }
+
+      a {
+        color: #36618c;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      a:hover {
+        color: #5a9fb5;
+      }
+
+      .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+        /* grid-template-columns: repeat(2, 1fr); */
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .product-card {
+        background: white;
+        border: 1px solid #e1e8ed;
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .product-card img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+      }
+
+      .product-card h3 {
+        color: #406280;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-card .price {
+        color: #2c3e50;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>
