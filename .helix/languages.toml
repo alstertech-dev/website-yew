@@ -1,0 +1,5 @@
+[language-server.rust-analyzer.config]
+# procMacro.ignored.stylist.use_style = true
+# procMacro.enable = false
+procMacro.processes = 4
+# cargo.buildScripts.enable = false

@@ -7,9 +7,10 @@ pub struct Props {
     pub product_price: f32,
 }
 
-#[component]
-fn ProductCard(props: &Props) -> Html {
-    let style = use_style!(r#"
+#[function_component(ProductCard)]
+fn product_card(props: &Props) -> Html {
+    let style = use_style!(
+        r#"
         background: white;
         border: 1px solid #E1E8ED;
         border-radius: 8px;
@@ -34,24 +35,36 @@ fn ProductCard(props: &Props) -> Html {
             color: #2C3E50;
             font-weight: bold;
         }
-        "#);
+        "#
+    );
     html! {
         <div class={style}>
             <img src="https://placehold.co/600x400" alt={props.product_name.clone()} />
-            <h2>{ props.product_name.clone() }</h2>
+            <h3>{ props.product_name.clone() }</h3>
             <p class="price">{ format!("€{:.2}", props.product_price) }</p>
         </div>
     }
 }
 
-#[component]
-fn App() -> Html {
+#[function_component(App)]
+fn app() -> Html {
+    let style = use_style!(
+        r#"
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        "#
+    );
+
     html! {
-        <div>
-            <ProductCard
-                product_name="Test Product"
-                product_price={99.99}
-            />
+        <div class={style}>
+            <ProductCard product_name="Headphones" product_price={79.10.0} />
+            <ProductCard product_name="Test Product" product_price={99.99} />
+            <ProductCard product_name="Test Product" product_price={99.99} />
+            <ProductCard product_name="Test Product" product_price={99.99} />
         </div>
     }
 }
