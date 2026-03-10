@@ -4,6 +4,5 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-stylist = { version = "0.14.0", features = ["yew", "yew_use_style"] }
 yew = { version = "0.22.1", features = ["csr"] }
 # yew = { git = "https://github.com/yewstack/yew/", features = ["csr"] }

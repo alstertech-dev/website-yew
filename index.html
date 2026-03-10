@@ -1,9 +1,164 @@
 <!doctype html>
 <html>
   <head>
-    <title>Yew App</title>
+    <title>AlsteTech</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ── Variables ── */
+      :root {
+        --wave1: #00a5c2;
+        --wave2: #007fa0;
+        --ink: #0d0d0d;
+        --paper: #f7f5f2;
+        --paper2: #edeae6;
+        --muted: #7a7772;
+        --radius: 4px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        font-size: 16px;
+        background: var(--paper);
+        padding-top: 5em;
+      }
+
+      a {
+        color: var(--wave2);
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      a:hover {
+        color: #5a9fb5;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        overflow: auto;
+        align-items: center;
+        width: 100%;
+        background: #ffffff;
+        padding: 1em 2em;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar .logo {
+        color: transparent;
+        width: 300px;
+        height: 50px;
+        background-image: url("img/altertech-logo.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: left center;
+        text-decoration: none;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 1em;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .nav-item a {
+        display: block;
+        padding: 0.75em 1.5em;
+        background: #ecf1f5;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+        /* grid-template-columns: repeat(2, 1fr); */
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .product-card {
+        background: white;
+        border: 1px solid #e1e8ed;
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .product-card img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+      }
+
+      .product-card h2 {
+        color: var(--wave2);
+        margin-bottom: 0.5rem;
+      }
+
+      .product-card .price {
+        color: var(--ink);
+        font-weight: bold;
+      }
+
+      .infobox {
+        display: block;
+        padding: 0.75em 1.5em;
+        background: #ecf1f5;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      .contents {
+        display: grid;
+        margin: 0 auto;
+        max-width: 1200px;
+        padding: 2rem;
+      }
+
+      .imprint {
+        display: grid;
+        margin: 0 auto;
+        max-width: 1200px;
+        padding: 2rem;
+        line-height: 3rem;
+      }
+
+      .imprint h1 {
+        text-align: center;
+      }
+
+      /* cards und text abwechselnd */
+      .card {
+        background: white;
+        border: 1px solid #e1e8ed;
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+      }
+    </style>
   </head>
   <body></body>
 </html>
