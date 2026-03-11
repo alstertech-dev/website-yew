@@ -1,0 +1,79 @@
+/* ── Variables ── */
+:root {
+  --wave1: #00a5c2;
+  --wave2: #007fa0;
+  --ink: #0d0d0d;
+  --paper: #f7f5f2;
+  --paper2: #edeae6;
+  --muted: #7a7772;
+  --radius: 4px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body { */
+/* font-family: sans-serif; */
+/* font-size: 16px; */
+/* background: var(--paper); */
+/* padding-top: 5em; */
+/* } */
+
+
+/* --- Products --- */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  /* grid-template-columns: repeat(2, 1fr); */
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: white;
+  border: 1px solid #e1e8ed;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.product-card h2 {
+  color: var(--wave2);
+  margin-bottom: 0.5rem;
+}
+
+.product-card .price {
+  color: var(--ink);
+  font-weight: bold;
+}
+
+/* --- Modal --- */
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(var(--paper2));
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem
+}
+
+.modal-overlay.open {
+  display: flex;
+}
