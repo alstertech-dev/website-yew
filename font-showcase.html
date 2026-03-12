@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Font Showcase — Physics School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chivo:ital,wght@0,300;0,700;1,300&family=Crete+Round&family=DM+Serif+Display:ital@0;1&family=Darker+Grotesque:wght@400;700&family=Exo+2:wght@300;600&family=Fragment+Mono&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;600&family=IBM+Plex+Serif:ital,wght@0,400;1,400&family=Instrument+Serif:ital@0;1&family=Jost:wght@300;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;700&family=Nunito:wght@300;700&family=Outfit:wght@300;600&family=Plus+Jakarta+Sans:wght@300;700&family=Raleway:ital,wght@0,300;0,700;1,300&family=Sora:wght@300;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;1,8..60,300&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;1,300&family=Unbounded:wght@300;700&family=Work+Sans:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --ink: #1a1a1a;
+    --rule: #d0cfc8;
+    --accent: #1a4fcc;
+    --accent2: #c8390a;
+    --mono: #4a4a4a;
+    --card: #ffffff;
+    --tag-bg: #e8e7e2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 48px 24px 80px;
+  }
+
+  header {
+    max-width: 860px;
+    margin: 0 auto 60px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 24px;
+  }
+
+  header .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 7vw, 72px);
+    letter-spacing: 0.02em;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+
+  header p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    color: #555;
+    max-width: 560px;
+  }
+
+  .grid {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: border-color 0.15s;
+  }
+
+  .card:hover { border-color: var(--accent); }
+
+  .card-meta { padding-top: 4px; }
+
+  .font-name {
+    font-family: 'Fragment Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .font-type {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    background: var(--tag-bg);
+    color: var(--mono);
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+
+  .font-notes {
+    font-size: 11.5px;
+    color: #777;
+    line-height: 1.5;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  .font-notes strong {
+    display: block;
+    color: var(--accent2);
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .card-preview {
+    border-left: 1px solid var(--rule);
+    padding-left: 24px;
+  }
+
+  .preview-big { line-height: 1.1; margin-bottom: 8px; }
+
+  .preview-small { font-size: 13px; color: #555; line-height: 1.55; }
+
+  .section-header {
+    max-width: 860px;
+    margin: 52px auto 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-header span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #999;
+    white-space: nowrap;
+  }
+
+  .section-header hr { flex: 1; border: none; border-top: 1px solid var(--rule); }
+
+  .star {
+    color: var(--accent2);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ── FONT STYLES ── */
+  .f-bebas .preview-big      { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 0.04em; }
+  .f-unbounded .preview-big  { font-family: 'Unbounded', sans-serif; font-size: 30px; font-weight: 700; }
+  .f-raleway .preview-big    { font-family: 'Raleway', sans-serif; font-size: 40px; font-weight: 700; letter-spacing: 0.05em; }
+  .f-fraunces .preview-big   { font-family: 'Fraunces', serif; font-size: 44px; font-weight: 300; font-style: italic; }
+  .f-dm-serif .preview-big   { font-family: 'DM Serif Display', serif; font-size: 44px; font-style: italic; }
+  .f-instrument .preview-big { font-family: 'Instrument Serif', serif; font-size: 44px; font-style: italic; }
+  .f-crete .preview-big      { font-family: 'Crete Round', serif; font-size: 40px; }
+  .f-spectral .preview-big   { font-family: 'Spectral', serif; font-size: 44px; font-weight: 300; font-style: italic; }
+
+  .f-ibm-sans .preview-big     { font-family: 'IBM Plex Sans', sans-serif; font-size: 32px; font-weight: 600; }
+  .f-manrope .preview-big      { font-family: 'Manrope', sans-serif; font-size: 32px; font-weight: 700; }
+  .f-plus-jakarta .preview-big { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 32px; font-weight: 700; }
+  .f-outfit .preview-big       { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; }
+  .f-sora .preview-big         { font-family: 'Sora', sans-serif; font-size: 32px; font-weight: 600; }
+  .f-work-sans .preview-big    { font-family: 'Work Sans', sans-serif; font-size: 32px; font-weight: 600; }
+  .f-jost .preview-big         { font-family: 'Jost', sans-serif; font-size: 32px; font-weight: 600; letter-spacing: 0.02em; }
+  .f-darker .preview-big       { font-family: 'Darker Grotesque', sans-serif; font-size: 36px; font-weight: 700; }
+  .f-exo .preview-big          { font-family: 'Exo 2', sans-serif; font-size: 32px; font-weight: 600; }
+  .f-chivo .preview-big        { font-family: 'Chivo', sans-serif; font-size: 32px; font-weight: 700; }
+  .f-nunito .preview-big       { font-family: 'Nunito', sans-serif; font-size: 32px; font-weight: 700; }
+
+  .f-ibm-serif .preview-big    { font-family: 'IBM Plex Serif', serif; font-size: 34px; font-style: italic; }
+  .f-lora .preview-big         { font-family: 'Lora', serif; font-size: 34px; font-weight: 600; }
+  .f-libre .preview-big        { font-family: 'Libre Baskerville', serif; font-size: 32px; font-weight: 700; }
+  .f-source-serif .preview-big { font-family: 'Source Serif 4', serif; font-size: 34px; font-weight: 300; }
+
+  .f-ibm-mono .preview-big   { font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600; }
+  .f-space-mono .preview-big { font-family: 'Space Mono', monospace; font-size: 26px; font-style: italic; }
+  .f-fragment .preview-big   { font-family: 'Fragment Mono', monospace; font-size: 24px; }
+
+  /* Preview small fonts */
+  .f-bebas .preview-small      { font-family: 'IBM Plex Sans', sans-serif; }
+  .f-unbounded .preview-small  { font-family: 'Unbounded', sans-serif; font-weight: 300; font-size: 12px; }
+  .f-raleway .preview-small    { font-family: 'Raleway', sans-serif; font-weight: 300; }
+  .f-fraunces .preview-small   { font-family: 'Fraunces', serif; font-weight: 300; }
+  .f-dm-serif .preview-small   { font-family: 'DM Serif Display', serif; }
+  .f-instrument .preview-small { font-family: 'Instrument Serif', serif; }
+  .f-crete .preview-small      { font-family: 'Crete Round', serif; font-size: 12.5px; }
+  .f-spectral .preview-small   { font-family: 'Spectral', serif; font-weight: 300; }
+  .f-ibm-sans .preview-small   { font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; }
+  .f-manrope .preview-small    { font-family: 'Manrope', sans-serif; font-weight: 300; }
+  .f-plus-jakarta .preview-small { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; }
+  .f-outfit .preview-small     { font-family: 'Outfit', sans-serif; font-weight: 300; }
+  .f-sora .preview-small       { font-family: 'Sora', sans-serif; font-weight: 300; }
+  .f-work-sans .preview-small  { font-family: 'Work Sans', sans-serif; font-weight: 300; }
+  .f-jost .preview-small       { font-family: 'Jost', sans-serif; font-weight: 300; }
+  .f-darker .preview-small     { font-family: 'Darker Grotesque', sans-serif; }
+  .f-exo .preview-small        { font-family: 'Exo 2', sans-serif; font-weight: 300; }
+  .f-chivo .preview-small      { font-family: 'Chivo', sans-serif; font-weight: 300; }
+  .f-nunito .preview-small     { font-family: 'Nunito', sans-serif; font-weight: 300; }
+  .f-ibm-serif .preview-small  { font-family: 'IBM Plex Serif', serif; }
+  .f-lora .preview-small       { font-family: 'Lora', serif; }
+  .f-libre .preview-small      { font-family: 'Libre Baskerville', serif; }
+  .f-source-serif .preview-small { font-family: 'Source Serif 4', serif; font-weight: 300; }
+  .f-ibm-mono .preview-small   { font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
+  .f-space-mono .preview-small { font-family: 'Space Mono', monospace; font-size: 11.5px; }
+  .f-fragment .preview-small   { font-family: 'Fragment Mono', monospace; font-size: 11.5px; }
+
+  @media (max-width: 600px) {
+    .card { grid-template-columns: 1fr; }
+    .card-preview { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="label">Font Showcase · Physics Education</div>
+  <h1>Typography Options</h1>
+  <p>26 Google Fonts curated for a school making physics classroom products — organized by display, UI sans-serif, body serif, and monospace.</p>
+</header>
+
+<div class="section-header"><span>Display &amp; Headline</span><hr></div>
+<div class="grid">
+
+  <div class="card f-bebas">
+    <div class="card-meta">
+      <div class="font-name">Bebas Neue</div>
+      <div class="font-type">Display / All-caps</div>
+      <div class="font-notes"><strong>Best for</strong> Hero headlines, product names, bold section titles</div>
+      <span class="star">★ Top pick — brand impact</span>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Physics Lab</div>
+      <div class="preview-small">Strong, condensed, authoritative. Great for hero sections and product titles where you want real presence.</div>
+    </div>
+  </div>
+
+  <div class="card f-unbounded">
+    <div class="card-meta">
+      <div class="font-name">Unbounded</div>
+      <div class="font-type">Display / Geometric</div>
+      <div class="font-notes"><strong>Best for</strong> Modern, tech-forward headlines, product packaging</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Forces &amp; Motion</div>
+      <div class="preview-small">Wide, geometric, futuristic. Feels right at home in science and engineering contexts.</div>
+    </div>
+  </div>
+
+  <div class="card f-raleway">
+    <div class="card-meta">
+      <div class="font-name">Raleway</div>
+      <div class="font-type">Display / Elegant Sans</div>
+      <div class="font-notes"><strong>Best for</strong> Headlines, navigation, product names with elegance</div>
+      <span class="star">★ Top pick — versatile</span>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Quantum Kit</div>
+      <div class="preview-small">Elegant wide letterforms with a distinctive 'W'. Works beautifully at both bold and light weights.</div>
+    </div>
+  </div>
+
+  <div class="card f-fraunces">
+    <div class="card-meta">
+      <div class="font-name">Fraunces</div>
+      <div class="font-type">Display / Optical Serif</div>
+      <div class="font-notes"><strong>Best for</strong> Academic editorial headers, premium feel</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Optics &amp; Light</div>
+      <div class="preview-small">Variable optical-size serif with beautiful italics. Smart, scholarly, and distinctive.</div>
+    </div>
+  </div>
+
+  <div class="card f-dm-serif">
+    <div class="card-meta">
+      <div class="font-name">DM Serif Display</div>
+      <div class="font-type">Display / Serif</div>
+      <div class="font-notes"><strong>Best for</strong> Large editorial headlines, course titles</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Wave Theory</div>
+      <div class="preview-small">High contrast, sophisticated serif. Striking at large sizes for editorial-style layouts.</div>
+    </div>
+  </div>
+
+  <div class="card f-instrument">
+    <div class="card-meta">
+      <div class="font-name">Instrument Serif</div>
+      <div class="font-type">Display / Editorial Serif</div>
+      <div class="font-notes"><strong>Best for</strong> Refined headers, blog posts, about pages</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Lab Reports</div>
+      <div class="preview-small">Warm, humanist serif with gorgeous italics. Feels trustworthy and editorial.</div>
+    </div>
+  </div>
+
+  <div class="card f-crete">
+    <div class="card-meta">
+      <div class="font-name">Crete Round</div>
+      <div class="font-type">Display / Slab Serif</div>
+      <div class="font-notes"><strong>Best for</strong> Approachable headlines, educational content</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Experiment Kit</div>
+      <div class="preview-small">Rounded slab serif — approachable yet substantial. Great for products aimed at students.</div>
+    </div>
+  </div>
+
+  <div class="card f-spectral">
+    <div class="card-meta">
+      <div class="font-name">Spectral</div>
+      <div class="font-type">Display / Literary Serif</div>
+      <div class="font-notes"><strong>Best for</strong> Long reads, documentation, academic articles</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Thermodynamics</div>
+      <div class="preview-small">Designed for screens, literary and precise. Excellent for longer academic text content.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-header"><span>UI &amp; Body Sans-Serif</span><hr></div>
+<div class="grid">
+
+  <div class="card f-ibm-sans">
+    <div class="card-meta">
+      <div class="font-name">IBM Plex Sans</div>
+      <div class="font-type">UI / Technical Sans</div>
+      <div class="font-notes"><strong>Best for</strong> Navigation, UI, body text, data labels</div>
+      <span class="star">★ Top pick — science &amp; tech feel</span>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Measure &amp; Record</div>
+      <div class="preview-small">Engineered by IBM for technical contexts. Clean, authoritative, and highly legible — ideal for a science-focused site.</div>
+    </div>
+  </div>
+
+  <div class="card f-manrope">
+    <div class="card-meta">
+      <div class="font-name">Manrope</div>
+      <div class="font-type">UI / Modern Sans</div>
+      <div class="font-notes"><strong>Best for</strong> Body text, UI elements, cards</div>
+      <span class="star">★ Top pick — readability</span>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Lab Equipment</div>
+      <div class="preview-small">Geometric but warm. Excellent weight range and screen legibility. Pairs well with almost any display font.</div>
+    </div>
+  </div>
+
+  <div class="card f-plus-jakarta">
+    <div class="card-meta">
+      <div class="font-name">Plus Jakarta Sans</div>
+      <div class="font-type">UI / Humanist Sans</div>
+      <div class="font-notes"><strong>Best for</strong> Product pages, nav, CTAs</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Student Toolkit</div>
+      <div class="preview-small">Fresh, balanced humanist sans. Friendly and professional — works well at all sizes.</div>
+    </div>
+  </div>
+
+  <div class="card f-outfit">
+    <div class="card-meta">
+      <div class="font-name">Outfit</div>
+      <div class="font-type">UI / Geometric Sans</div>
+      <div class="font-notes"><strong>Best for</strong> Clean modern UIs, product pages</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Classroom Ready</div>
+      <div class="preview-small">Clean geometric shapes with friendly proportions. Feels contemporary and confident.</div>
+    </div>
+  </div>
+
+  <div class="card f-sora">
+    <div class="card-meta">
+      <div class="font-name">Sora</div>
+      <div class="font-type">UI / Geometric Sans</div>
+      <div class="font-notes"><strong>Best for</strong> Tech-forward interfaces, product labels</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Precision Tools</div>
+      <div class="preview-small">Crisp geometric design, slightly futuristic. Works beautifully at small UI sizes.</div>
+    </div>
+  </div>
+
+  <div class="card f-work-sans">
+    <div class="card-meta">
+      <div class="font-name">Work Sans</div>
+      <div class="font-type">UI / Versatile Sans</div>
+      <div class="font-notes"><strong>Best for</strong> Body text, navigation, product descriptions</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Science Made Simple</div>
+      <div class="preview-small">Optimized for on-screen reading. Sturdy, legible, and flexible — a reliable everyday choice.</div>
+    </div>
+  </div>
+
+  <div class="card f-jost">
+    <div class="card-meta">
+      <div class="font-name">Jost</div>
+      <div class="font-type">UI / Geometric Sans</div>
+      <div class="font-notes"><strong>Best for</strong> Logos, navigation, UI labels</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Applied Physics</div>
+      <div class="preview-small">Futurist-inspired, clean geometric with distinctive uppercase. Excellent for brand wordmarks and nav.</div>
+    </div>
+  </div>
+
+  <div class="card f-darker">
+    <div class="card-meta">
+      <div class="font-name">Darker Grotesque</div>
+      <div class="font-type">UI / Condensed Grotesque</div>
+      <div class="font-notes"><strong>Best for</strong> Dense UIs, data-heavy pages, spec tables</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Force = Mass × Acc</div>
+      <div class="preview-small">Tall x-height, condensed forms. Great information density for spec sheets and product tables.</div>
+    </div>
+  </div>
+
+  <div class="card f-exo">
+    <div class="card-meta">
+      <div class="font-name">Exo 2</div>
+      <div class="font-type">UI / Sci-fi Geometric</div>
+      <div class="font-notes"><strong>Best for</strong> Science branding, product titles, tech feel</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Vector Analysis</div>
+      <div class="preview-small">Designed specifically for science and technology topics. Wide weight range, confidently technical.</div>
+    </div>
+  </div>
+
+  <div class="card f-chivo">
+    <div class="card-meta">
+      <div class="font-name">Chivo</div>
+      <div class="font-type">UI / Grotesque Sans</div>
+      <div class="font-notes"><strong>Best for</strong> Body text, editorial UIs, clean layouts</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Kinetic Energy</div>
+      <div class="preview-small">Sharp, no-nonsense grotesque with good rhythm in body copy. Clean and functional.</div>
+    </div>
+  </div>
+
+  <div class="card f-nunito">
+    <div class="card-meta">
+      <div class="font-name">Nunito</div>
+      <div class="font-type">UI / Rounded Sans</div>
+      <div class="font-notes"><strong>Best for</strong> Student-facing pages, friendly tone</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Learn by Doing</div>
+      <div class="preview-small">Rounded terminals give a friendly, approachable feel. Great for student-facing product pages.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-header"><span>Body &amp; Reading Serif</span><hr></div>
+<div class="grid">
+
+  <div class="card f-ibm-serif">
+    <div class="card-meta">
+      <div class="font-name">IBM Plex Serif</div>
+      <div class="font-type">Serif / Technical</div>
+      <div class="font-notes"><strong>Best for</strong> Documentation, about pages, editorial</div>
+      <span class="star">★ Top pick — matches IBM Plex Sans</span>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Understanding Gravity</div>
+      <div class="preview-small">Pairs perfectly with IBM Plex Sans for a cohesive technical-editorial system. Credible and warm.</div>
+    </div>
+  </div>
+
+  <div class="card f-lora">
+    <div class="card-meta">
+      <div class="font-name">Lora</div>
+      <div class="font-type">Serif / Literary</div>
+      <div class="font-notes"><strong>Best for</strong> Long-form content, course descriptions</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">The Laws of Motion</div>
+      <div class="preview-small">Calligraphic, warm serif. Excellent for reading-heavy pages like lesson descriptions and teacher guides.</div>
+    </div>
+  </div>
+
+  <div class="card f-libre">
+    <div class="card-meta">
+      <div class="font-name">Libre Baskerville</div>
+      <div class="font-type">Serif / Classic</div>
+      <div class="font-notes"><strong>Best for</strong> Academic content, trust-building pages</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Curriculum Aligned</div>
+      <div class="preview-small">Classic Baskerville optimized for screens. Traditional credibility — makes content feel authoritative.</div>
+    </div>
+  </div>
+
+  <div class="card f-source-serif">
+    <div class="card-meta">
+      <div class="font-name">Source Serif 4</div>
+      <div class="font-type">Serif / Humanist</div>
+      <div class="font-notes"><strong>Best for</strong> Article pages, documentation, blog</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">Understanding Waves</div>
+      <div class="preview-small">Adobe's humanist serif, excellent legibility across screen sizes. Great for long educational content.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-header"><span>Monospace</span><hr></div>
+<div class="grid">
+
+  <div class="card f-ibm-mono">
+    <div class="card-meta">
+      <div class="font-name">IBM Plex Mono</div>
+      <div class="font-type">Monospace / Technical</div>
+      <div class="font-notes"><strong>Best for</strong> Formulas, code, data labels, captions</div>
+      <span class="star">★ Top pick — physics formulas</span>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">F = ma · v² / r</div>
+      <div class="preview-small">IBM's mono — clean and authoritative. Perfect for displaying physics equations, part numbers, or specs.</div>
+    </div>
+  </div>
+
+  <div class="card f-space-mono">
+    <div class="card-meta">
+      <div class="font-name">Space Mono</div>
+      <div class="font-type">Monospace / Display</div>
+      <div class="font-notes"><strong>Best for</strong> Decorative labels, retro-tech accents</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">E = mc²</div>
+      <div class="preview-small">Quirky, distinctive monospace with a retro-science feel. Use sparingly for flair and character.</div>
+    </div>
+  </div>
+
+  <div class="card f-fragment">
+    <div class="card-meta">
+      <div class="font-name">Fragment Mono</div>
+      <div class="font-type">Monospace / Minimal</div>
+      <div class="font-notes"><strong>Best for</strong> UI labels, small caps, technical callouts</div>
+    </div>
+    <div class="card-preview">
+      <div class="preview-big">v = λf · Δx·Δp</div>
+      <div class="preview-small">Extremely clean and minimal. Exceptional at small sizes for labels, data readouts, and UI details.</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
