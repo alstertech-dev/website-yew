@@ -9,6 +9,8 @@ pub struct Product {
     pub image: String,
     pub gender: grammar::Gender,
     pub number: grammar::Number,
+    pub manual: Option<String>,
+    pub resources: Option<String>,
 }
 
 mod grammar {
@@ -68,9 +70,14 @@ fn product_card(props: &Props) -> Html {
     };
     html! {
         <div class="product-card" onclick={on_click}>
-            <img src={format!("/img/products/{}", &props.product.image)} alt={props.product.name.clone()} />
-            <h2>{ props.product.name.clone() }</h2>
-            <p class="price">{ format!("€{:.2}", props.product.price) }</p>
+            <img class="product-image" src={format!("/img/products/{}", &props.product.image)} alt={props.product.name.clone()} />
+            <div class="product-info">
+                <h3 class="product-name">{ props.product.name.clone() }</h3>
+                <div class="product-footer">
+                    <span class="product-price">{ format!("€{:.2}", props.product.price) }</span>
+                    <button style="padding: 0.5rem 1rem; font-size: 0.8rem" class="btn btn-outline">{"Infos"}</button>
+                </div>
+            </div>
         </div>
     }
 }
@@ -95,6 +102,8 @@ fn app() -> Html {
             image: "headphones.jpg".into(),
             gender: grammar::Gender::Feminine,
             number: grammar::Number::Plural,
+            manual: Some("https://github.com/innin-jam".to_owned()),
+            resources: None,
         },
         Product {
             name: "Linse".into(),
@@ -102,6 +111,26 @@ fn app() -> Html {
             image: "lense.jpg".into(),
             gender: grammar::Gender::Feminine,
             number: grammar::Number::Plural,
+            manual: None,
+            resources: None,
+        },
+        Product {
+            name: "T-Rex Modelle".into(),
+            price: 15.00,
+            image: "t-rex.jpg".into(),
+            gender: grammar::Gender::Neutral,
+            number: grammar::Number::Singular,
+            manual: None,
+            resources: Some("downloads/Masse eines Tyrannosaurus Rex Arbeitsblatt.pdf".to_owned()),
+        },
+        Product {
+            name: "Test Product".into(),
+            price: 99.99,
+            image: "t-rex.jpg".into(),
+            gender: grammar::Gender::Feminine,
+            number: grammar::Number::Plural,
+            manual: None,
+            resources: None,
         },
         Product {
             name: "Test Product".into(),
@@ -109,12 +138,23 @@ fn app() -> Html {
             image: "t-rex.jpg".into(),
             gender: grammar::Gender::Neutral,
             number: grammar::Number::Singular,
+            manual: None,
+            resources: None,
+        },
+        Product {
+            name: "Test Product".into(),
+            price: 99.99,
+            image: "t-rex.jpg".into(),
+            gender: grammar::Gender::Neutral,
+            number: grammar::Number::Singular,
+            manual: None,
+            resources: None,
         },
     ];
 
     html! {
         <>
-        <div class="products">
+        <div class="products-grid">
             { for products.iter().map(|p| html! {
                 <ProductCard product={p.clone()} on_click={open_modal.clone()} />
             })}
@@ -122,17 +162,25 @@ fn app() -> Html {
         <div class={ if modal.is_some() { "modal-overlay open" } else { "modal-overlay" } } onclick={close_modal}>
             if let Some(product) = (*modal).clone() {
             <div class="modal" onclick={Callback::from(|e: MouseEvent| e.stop_propagation())}>
-                <p class="modal-product-name">{ format!("{} -- €{:.2}", product.name, product.price) }</p>
+                <h3 class="modal-product-name">{ format!("{} — €{:.2}", product.name, product.price) }</h3>
                 <p>
-                    {
-                        format!("Onlinebestellungen sind noch nicht verfügbar.
-                            Wenn Sie {} {} bestellen möchten, oder uns einfach eine Frage stellen wollen, schreiben Sie uns gerne eine Email an:
-                        ", get_definite_article(product.gender, product.number, grammar::Case::Accusative), product.name)
-                    }
+                if let Some(manual) = product.manual {
+                    <a style="padding: 0.4rem 1rem; font-size: 0.8rem; margin-right: 10px;" class="btn btn-outline" href={manual} target="_blank" rel="noopener noreferrer">{"Anleitung"}</a>
+                }
+                if let Some(resources) = product.resources {
+                    <a style="padding: 0.4rem 1rem; font-size: 0.8rem;" class="btn btn-outline" href={resources} target="_blank" rel="noopener noreferrer">{"Weitere Ressourcen"}</a>
+                }
                 </p>
-                <p class="modal-email">
-                {format!("{EMAIL}")}
+                <p>
+                    { "Onlinebestellungen sind auf der Website momentan nicht verfügbar. Wenn Sie " }
+                    {get_definite_article(product.gender, product.number, grammar::Case::Accusative)}{" "}
+                    <strong>{product.name}</strong>
+                    {" bestellen möchten, oder uns einfach eine Frage stellen wollen, schreiben Sie uns gerne eine Email an:"}
                 </p>
+                <br/>
+                <a class="modal-email" href={format!("mailto:{}", EMAIL)}>
+                {EMAIL}
+                </a>
             </div>
             }
         </div>
