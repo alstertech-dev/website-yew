@@ -1,3 +1,4 @@
+use grammar::get_definite_article;
 use yew::prelude::*;
 
 const EMAIL: &str = "alstertech@alstergymnasium.de";
@@ -13,47 +14,7 @@ pub struct Product {
     pub resources: Option<String>,
 }
 
-mod grammar {
-    #[derive(Clone, PartialEq)]
-    pub enum Gender {
-        Masculine,
-        Feminine,
-        Neutral,
-    }
-
-    #[derive(Clone, PartialEq)]
-    pub enum Number {
-        Singular,
-        Plural,
-    }
-
-    #[derive(Clone, PartialEq)]
-    pub enum Case {
-        Nominative,
-        Accusative,
-    }
-
-    pub fn get_definite_article(gender: Gender, number: Number, case: Case) -> String {
-        match number {
-            Number::Plural => "die",
-            Number::Singular => match gender {
-                Gender::Masculine => match case {
-                    Case::Nominative => "der",
-                    Case::Accusative => "den",
-                },
-                Gender::Feminine => match case {
-                    Case::Nominative | Case::Accusative => "die",
-                },
-                Gender::Neutral => match case {
-                    Case::Nominative | Case::Accusative => "das",
-                },
-            },
-        }
-        .to_owned()
-    }
-}
-
-use grammar::get_definite_article;
+mod grammar;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
@@ -75,15 +36,15 @@ fn product_card(props: &Props) -> Html {
                 <h3 class="product-name">{ props.product.name.clone() }</h3>
                 <div class="product-footer">
                     <span class="product-price">{ format!("€{:.2}", props.product.price) }</span>
-                    <button style="padding: 0.5rem 1rem; font-size: 0.8rem" class="btn btn-outline">{"Infos"}</button>
+                    <a style="padding: 0.5rem 1rem; font-size: 0.8rem" class="btn btn-outline">{"Infos"}</a>
                 </div>
             </div>
         </div>
     }
 }
 
-#[function_component(App)]
-fn app() -> Html {
+#[function_component(ProductsPage)]
+fn products_page() -> Html {
     let modal = use_state(|| None::<Product>);
 
     let open_modal = {
@@ -184,6 +145,30 @@ fn app() -> Html {
             </div>
             }
         </div>
+        </>
+    }
+}
+
+#[function_component(Nav)]
+fn nav() -> Html {
+    html! {
+        <nav class="nav">
+          <a class="logo" href="/"><img src="img/altertech-logo.svg"/></a>
+          <ul class="nav-menu">
+            <li><a class="btn btn-outline" href="/">{"Home"}</a></li>
+            <li><a class="btn btn-outline" href="products">{"Produkte"}</a></li>
+            <li><a class="btn btn-outline" href="kontakt">{"Kontakt"}</a></li>
+          </ul>
+        </nav>
+    }
+}
+
+#[function_component(App)]
+fn app() -> Html {
+    html! {
+        <>
+        <Nav/>
+        <ProductsPage/>
         </>
     }
 }
