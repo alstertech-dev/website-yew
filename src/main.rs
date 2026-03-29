@@ -1,7 +1,20 @@
 use grammar::get_definite_article;
 use yew::prelude::*;
+use yew_router::prelude::*;
+
+mod grammar;
 
 const EMAIL: &str = "alstertech@alstergymnasium.de";
+
+#[derive(Clone, Routable, PartialEq)]
+enum Route {
+    #[at("/")]
+    Home,
+    #[at("/products")]
+    Products,
+    #[at("/imprint")]
+    Imprint,
+}
 
 #[derive(Clone, PartialEq)]
 pub struct Product {
@@ -14,12 +27,34 @@ pub struct Product {
     pub resources: Option<String>,
 }
 
-mod grammar;
-
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub product: Product,
     pub on_click: Callback<Product>,
+}
+
+#[function_component(Nav)]
+fn nav() -> Html {
+    html! {
+        <nav class="nav">
+          <a class="logo" href="/"><img src="img/altertech-logo.svg"/></a>
+          <ul class="nav-menu">
+            <li><a class="btn btn-outline" href="/">{"Home"}</a></li>
+            <li><a class="btn btn-outline" href="products">{"Produkte"}</a></li>
+            <li><a class="btn btn-outline" href="imprint">{"Impressum"}</a></li>
+          </ul>
+        </nav>
+    }
+}
+
+#[function_component(Footer)]
+fn footer() -> Html {
+    html! {
+        <footer class="footer">
+        <img src="img/altertech-logo-light.svg"/>
+        <a href="imprint">{"Impressum"}</a>
+        </footer>
+    }
 }
 
 #[function_component(ProductCard)]
@@ -114,7 +149,8 @@ fn products_page() -> Html {
     ];
 
     html! {
-        <>
+        <main>
+        <h1>{"Unsere Produkte"}</h1>
         <div class="products-grid">
             { for products.iter().map(|p| html! {
                 <ProductCard product={p.clone()} on_click={open_modal.clone()} />
@@ -123,7 +159,7 @@ fn products_page() -> Html {
         <div class={ if modal.is_some() { "modal-overlay open" } else { "modal-overlay" } } onclick={close_modal}>
             if let Some(product) = (*modal).clone() {
             <div class="modal" onclick={Callback::from(|e: MouseEvent| e.stop_propagation())}>
-                <h3 class="modal-product-name">{ format!("{} — €{:.2}", product.name, product.price) }</h3>
+                <h3 class="modal-product-name">{&product.name}{" — €"}{format!("{:.2}", &product.price)}</h3>
                 <p>
                 if let Some(manual) = product.manual {
                     <a style="padding: 0.4rem 1rem; font-size: 0.8rem; margin-right: 10px;" class="btn btn-outline" href={manual} target="_blank" rel="noopener noreferrer">{"Anleitung"}</a>
@@ -139,27 +175,47 @@ fn products_page() -> Html {
                     {" bestellen möchten, oder uns einfach eine Frage stellen wollen, schreiben Sie uns gerne eine Email an:"}
                 </p>
                 <br/>
-                <a class="modal-email" href={format!("mailto:{}", EMAIL)}>
+                <a class="modal-email" href={format!("mailto:{}",EMAIL)}>
                 {EMAIL}
                 </a>
             </div>
             }
         </div>
-        </>
+        </main>
     }
 }
 
-#[function_component(Nav)]
-fn nav() -> Html {
+#[function_component(Imprint)]
+fn imprint() -> Html {
     html! {
-        <nav class="nav">
-          <a class="logo" href="/"><img src="img/altertech-logo.svg"/></a>
-          <ul class="nav-menu">
-            <li><a class="btn btn-outline" href="/">{"Home"}</a></li>
-            <li><a class="btn btn-outline" href="products">{"Produkte"}</a></li>
-            <li><a class="btn btn-outline" href="kontakt">{"Kontakt"}</a></li>
-          </ul>
-        </nav>
+        <main>
+          <h1>{ "Impressum" }</h1>
+          <div class="imprint-wrapper">
+            <div class="imprint-section">
+              <h2>{ "Geschäftsleitung" }</h2>
+              <p>
+              {"Jannes Neufert, Geschäftsführer"}
+              </p>
+              <h2>{"Anschrift"}</h2>
+              <adress>
+              {"AlsterTech"}
+              <br/>
+              {"Maurepasstraße 67, 24558 Henstedt-Ulzburg"}
+              <br/>
+              {"E-Mail: "}
+              <a href={format!("mailto:{}", EMAIL)}>{EMAIL}</a>
+              </adress>
+            </div>
+          </div>
+        </main>
+    }
+}
+
+fn switch(routes: Route) -> Html {
+    match routes {
+        Route::Home => html!(<main></main>),
+        Route::Products => html! {<ProductsPage/>},
+        Route::Imprint => html! {<Imprint/>},
     }
 }
 
@@ -167,8 +223,11 @@ fn nav() -> Html {
 fn app() -> Html {
     html! {
         <>
-        <Nav/>
-        <ProductsPage/>
+        <Nav />
+        <BrowserRouter>
+            <Switch<Route> render={switch} />
+        </BrowserRouter>
+        <Footer />
         </>
     }
 }

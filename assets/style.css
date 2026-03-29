@@ -26,6 +26,17 @@ body {
   font-size: 16px;
   line-height: 1.65;
   padding-top: 100px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
 }
 
 a {
@@ -38,6 +49,10 @@ a {
 
 a:hover {
   color: var(--wave1);
+}
+
+h1 {
+  padding: 2rem 0;
 }
 
 body strong {
@@ -87,12 +102,7 @@ body strong {
 }
 
 .nav .logo img {
-  /* object-fit: cover; */
-  /* width: 100%; */
-  /* height: auto; */
-  /* max-width: 300px; */
   max-height: 40px;
-  /* aspect-ratio: 666.52661/115.96815; */
 }
 
 .nav .logo {
@@ -100,25 +110,11 @@ body strong {
   line-height: 0;
 }
 
-/* .nav .logo { */
-/* color: transparent; */
-/* width: 300px; */
-/* height: 50px; */
-/* background-image: url("img/altertech-logo.svg"); */
-/* background-repeat: no-repeat; */
-/* background-size: contain; */
-/* background-position: left center; */
-/* text-decoration: none; */
-/* } */
-
 .nav-menu {
   display: flex;
   list-style: none;
   gap: 1em;
   padding-left: 20px;
-  /* position: absolute; */
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
 }
 
 /* --- Products --- */
@@ -127,8 +123,6 @@ body strong {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2px;
-  /* background: #d8d4ce; */
-  margin: 2em;
 }
 
 .product-card {
@@ -235,4 +229,20 @@ body strong {
 
 .modal-email:hover {
   text-decoration: underline;
+}
+
+/** --- Footer --- **/
+
+.footer {
+  background: var(--ink);
+  color: var(--paper);
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  padding: 2rem;
+  margin-top: minmax(1rem, 100%);
+}
+
+.footer img {
+  max-height: 40px;
 }
