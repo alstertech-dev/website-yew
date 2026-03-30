@@ -95,52 +95,34 @@ fn products_page() -> Html {
         Product {
             name: "Kopfhörer".into(),
             price: 79.10,
-            image: "headphones.jpg".into(),
+            image: "earphones.webp".into(),
             gender: grammar::Gender::Feminine,
             number: grammar::Number::Plural,
-            manual: Some("https://github.com/innin-jam".to_owned()),
+            manual: Some("downloads/Kopfhörer Anleitung.pdf".to_owned()),
             resources: None,
         },
         Product {
             name: "Linse".into(),
             price: 249.00,
-            image: "lense.jpg".into(),
+            image: "lense.webp".into(),
             gender: grammar::Gender::Feminine,
             number: grammar::Number::Plural,
             manual: None,
-            resources: None,
+            resources: Some("downloads/Produktbeschreibung_Spiegel&Linsen.docx".to_owned()),
         },
         Product {
             name: "T-Rex Modelle".into(),
             price: 15.00,
-            image: "t-rex.jpg".into(),
+            image: "t-rex.webp".into(),
             gender: grammar::Gender::Neutral,
             number: grammar::Number::Singular,
             manual: None,
             resources: Some("downloads/Masse eines Tyrannosaurus Rex Arbeitsblatt.pdf".to_owned()),
         },
         Product {
-            name: "Test Product".into(),
-            price: 99.99,
-            image: "t-rex.jpg".into(),
-            gender: grammar::Gender::Feminine,
-            number: grammar::Number::Plural,
-            manual: None,
-            resources: None,
-        },
-        Product {
-            name: "Test Product".into(),
-            price: 99.99,
-            image: "t-rex.jpg".into(),
-            gender: grammar::Gender::Neutral,
-            number: grammar::Number::Singular,
-            manual: None,
-            resources: None,
-        },
-        Product {
-            name: "Test Product".into(),
-            price: 99.99,
-            image: "t-rex.jpg".into(),
+            name: "Spektrometer".into(),
+            price: 15.00,
+            image: "spektrometer.webp".into(),
             gender: grammar::Gender::Neutral,
             number: grammar::Number::Singular,
             manual: None,
@@ -172,9 +154,8 @@ fn products_page() -> Html {
                     { "Onlinebestellungen sind auf der Website momentan nicht verfügbar. Wenn Sie " }
                     {get_definite_article(product.gender, product.number, grammar::Case::Accusative)}{" "}
                     <strong>{product.name}</strong>
-                    {" bestellen möchten, oder uns einfach eine Frage stellen wollen, schreiben Sie uns gerne eine Email an:"}
+                    {" bestellen möchten, oder uns einfach eine Frage stellen wollen, schreiben Sie uns gerne eine E-Mail an:"}
                 </p>
-                <br/>
                 <a class="modal-email" href={format!("mailto:{}",EMAIL)}>
                 {EMAIL}
                 </a>
@@ -211,9 +192,26 @@ fn imprint() -> Html {
     }
 }
 
+#[function_component(Home)]
+fn home() -> Html {
+    html! {
+        <main>
+        <h1> {"Die Schülerfirma des Alstergymnasiums"}</h1>
+        <p>{
+            "Willkommen bei AlsterTech! Wir wurden 2025 als Projekt im Profilseminar des Physikprofils am Alstergymnasium in Henstedt-Ulzburg gegründet. Unser Ziel ist es, für einen spannenderen Physikunterricht zu sorgen, indem wir interaktive Produkte anbieten, die den häufig sehr theoretischen Physikunterricht anschaulicher machen sollen."
+        }</p>
+        <h2> {"Was ist eine Schülerfirma?"}</h2>
+        <h2> {"Unser Team"} </h2>
+        <p>{
+            "AlsterTech besteht aus einem engagierten Team von Schüler*innen, die zum ersten Mal die Erfahrung machen, Teil einer Firma zu sein. Für die Entwicklung und Produktion unserer Produkte verwenden wir den Makerspace, einen Raum mit 3D-Druckern und anderen technischen Geräten."
+        }</p>
+        </main>
+    }
+}
+
 fn switch(routes: Route) -> Html {
     match routes {
-        Route::Home => html!(<main></main>),
+        Route::Home => html!(<Home/>),
         Route::Products => html! {<ProductsPage/>},
         Route::Imprint => html! {<Imprint/>},
     }
