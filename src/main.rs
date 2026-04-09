@@ -91,7 +91,8 @@ fn products_page() -> Html {
         Callback::from(move |_| selected.set(None))
     };
 
-    let products = vec![
+    let products = use_memo((), |_|
+        vec![
         Product {
             name: "Kopfhörer".into(),
             price: 79.10,
@@ -128,7 +129,7 @@ fn products_page() -> Html {
             manual: None,
             resources: None,
         },
-    ];
+    ]);
 
     html! {
         <main>
