@@ -9,8 +9,21 @@ WORKDIR /app
 COPY . .
 RUN trunk build --release
 
-# Stage 2: Serve with nginx
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
+FROM caddy:2.11-alpine AS final
+
+# Copy built frontend from Stage 1
+COPY --from=builder /app/dist /var/www/html
+
+# Create Caddy configuration
+COPY <<-"EOF" /etc/caddy/Caddyfile
+:80 {
+  # Static file server (frontend)
+  handle {
+    root * /var/www/html
+    try_files {path} /index.html
+    file_server
+  }
+}
+EOF
+
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
