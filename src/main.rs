@@ -37,7 +37,7 @@ pub struct Props {
 fn nav() -> Html {
     html! {
         <nav class="nav">
-            <Link<Route> to={Route::Home}><img src="img/altertech-logo.svg"/></Link<Route>>
+            <Link<Route> to={Route::Home}><img class="logo" src="img/altertech-logo.svg"/></Link<Route>>
             <ul class="nav-menu">
                 <li><Link<Route> to={Route::Home} classes="btn btn-outline">{"Home"}</Link<Route>></li>
                 <li><Link<Route> to={Route::Products} classes="btn btn-outline">{"Produkte"}</Link<Route>></li>
@@ -82,7 +82,7 @@ fn product_list() -> Vec<Product> {
     vec![
         Product {
             name: "Kopfhörer".into(),
-            price: 79.10,
+            price: 4.00,
             image: "earphones.webp".into(),
             gender: grammar::Gender::Feminine,
             number: grammar::Number::Plural,
@@ -91,7 +91,7 @@ fn product_list() -> Vec<Product> {
         },
         Product {
             name: "T-Rex Modelle".into(),
-            price: 15.00,
+            price: 10.00,
             image: "t-rex.webp".into(),
             gender: grammar::Gender::Neutral,
             number: grammar::Number::Singular,
