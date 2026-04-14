@@ -37,12 +37,12 @@ pub struct Props {
 fn nav() -> Html {
     html! {
         <nav class="nav">
-          <a class="logo" href="/"><img src="img/altertech-logo.svg"/></a>
-          <ul class="nav-menu">
-            <li><a class="btn btn-outline" href="/">{"Home"}</a></li>
-            <li><a class="btn btn-outline" href="products">{"Produkte"}</a></li>
-            <li><a class="btn btn-outline" href="imprint">{"Impressum"}</a></li>
-          </ul>
+            <Link<Route> to={Route::Home}><img src="img/altertech-logo.svg"/></Link<Route>>
+            <ul class="nav-menu">
+                <li><Link<Route> to={Route::Home} classes="btn btn-outline">{"Home"}</Link<Route>></li>
+                <li><Link<Route> to={Route::Products} classes="btn btn-outline">{"Produkte"}</Link<Route>></li>
+                <li><Link<Route> to={Route::Imprint} classes="btn btn-outline">{"Impressum"}</Link<Route>></li>
+            </ul>
         </nav>
     }
 }
@@ -91,45 +91,39 @@ fn products_page() -> Html {
         Callback::from(move |_| selected.set(None))
     };
 
-    let products = use_memo((), |_|
+    let products = use_memo((), |_| {
         vec![
-        Product {
-            name: "Kopfhörer".into(),
-            price: 79.10,
-            image: "earphones.webp".into(),
-            gender: grammar::Gender::Feminine,
-            number: grammar::Number::Plural,
-            manual: Some("downloads/Kopfhörer Anleitung.pdf".to_owned()),
-            resources: None,
-        },
-        Product {
-            name: "Linse".into(),
-            price: 249.00,
-            image: "lense.webp".into(),
-            gender: grammar::Gender::Feminine,
-            number: grammar::Number::Plural,
-            manual: None,
-            resources: Some("downloads/Produktbeschreibung_Spiegel&Linsen.docx".to_owned()),
-        },
-        Product {
-            name: "T-Rex Modelle".into(),
-            price: 15.00,
-            image: "t-rex.webp".into(),
-            gender: grammar::Gender::Neutral,
-            number: grammar::Number::Singular,
-            manual: None,
-            resources: Some("downloads/Masse eines Tyrannosaurus Rex Arbeitsblatt.pdf".to_owned()),
-        },
-        Product {
-            name: "Spektrometer".into(),
-            price: 15.00,
-            image: "spektrometer.webp".into(),
-            gender: grammar::Gender::Neutral,
-            number: grammar::Number::Singular,
-            manual: None,
-            resources: None,
-        },
-    ]);
+            Product {
+                name: "Kopfhörer".into(),
+                price: 79.10,
+                image: "earphones.webp".into(),
+                gender: grammar::Gender::Feminine,
+                number: grammar::Number::Plural,
+                manual: Some("downloads/Kopfhörer Anleitung.pdf".to_owned()),
+                resources: None,
+            },
+            Product {
+                name: "T-Rex Modelle".into(),
+                price: 15.00,
+                image: "t-rex.webp".into(),
+                gender: grammar::Gender::Neutral,
+                number: grammar::Number::Singular,
+                manual: None,
+                resources: Some(
+                    "downloads/Masse eines Tyrannosaurus Rex Arbeitsblatt.pdf".to_owned(),
+                ),
+            },
+            Product {
+                name: "Spektrometer".into(),
+                price: 15.00,
+                image: "spektrometer.webp".into(),
+                gender: grammar::Gender::Neutral,
+                number: grammar::Number::Singular,
+                manual: None,
+                resources: None,
+            },
+        ]
+    });
 
     html! {
         <main>
@@ -221,13 +215,11 @@ fn switch(routes: Route) -> Html {
 #[function_component(App)]
 fn app() -> Html {
     html! {
-        <>
-        <Nav />
         <BrowserRouter>
+            <Nav />
             <Switch<Route> render={switch} />
+            <Footer />
         </BrowserRouter>
-        <Footer />
-        </>
     }
 }
 
