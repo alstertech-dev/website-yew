@@ -164,26 +164,30 @@ fn products_page() -> Html {
 #[function_component(Imprint)]
 fn imprint() -> Html {
     html! {
-        <main>
-          <h1>{ "Impressum" }</h1>
-          <div class="imprint-wrapper">
-            <div class="imprint-section">
-              <h2>{ "Geschäftsleitung" }</h2>
-              <p>
-              {"Jannes Neufert, Geschäftsführer"}
-              </p>
-              <h2>{"Anschrift"}</h2>
-              <address>
-              {"AlsterTech"}
-              <br/>
-              {"Maurepasstraße 67, 24558 Henstedt-Ulzburg"}
-              <br/>
-              {"E-Mail: "}
-              <a href={format!("mailto:{}", EMAIL)}>{EMAIL}</a>
-              </address>
-            </div>
-          </div>
-        </main>
+    <main>
+        <h1>{"Impressum"}</h1>
+        <p>{"Angaben gemäß § 5 DDG"}</p>
+        <p>
+          {"AlsterTech sAG"}<br />
+          <br />
+          {"Maurepasstraße 67"}<br />
+          {"24558 Henstedt-Ulzburg "}<br />
+        </p>
+        <p>
+          <strong>{"Vertreten durch: "}</strong><br />
+          {"Jannis Neufert"}<br />
+        </p>
+        <p>
+          <strong>{"Verbraucherstreitbeilegung / Universalschlichtungsstelle"}</strong>
+          <br />{"Wir nehmen nicht an Streitbeilegungsverfahren vor einer
+          Verbraucherschlichtungsstelle teil und sind dazu auch nicht verpflichtet."}
+        </p>
+        <p>
+          <strong>{"Datenschutzerklärung"}</strong><br />
+          {"Unter dem folgenden Link finden Sie unsere "}
+          <Link<Route> to={Route::Home}>{"Datenschutzerklärung"}</Link<Route>>
+        </p>
+    </main>
     }
 }
 
