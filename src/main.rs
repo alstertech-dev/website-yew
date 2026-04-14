@@ -18,13 +18,13 @@ enum Route {
 
 #[derive(Clone, PartialEq)]
 pub struct Product {
-    pub name: String,
+    pub name: AttrValue,
     pub price: f32,
-    pub image: String,
+    pub image: AttrValue,
     pub gender: grammar::Gender,
     pub number: grammar::Number,
-    pub manual: Option<String>,
-    pub resources: Option<String>,
+    pub manual: Option<AttrValue>,
+    pub resources: Option<AttrValue>,
 }
 
 #[derive(Properties, PartialEq)]
@@ -78,6 +78,38 @@ fn product_card(props: &Props) -> Html {
     }
 }
 
+fn product_list() -> Vec<Product> {
+    vec![
+        Product {
+            name: "Kopfhörer".into(),
+            price: 79.10,
+            image: "earphones.webp".into(),
+            gender: grammar::Gender::Feminine,
+            number: grammar::Number::Plural,
+            manual: Some("downloads/Kopfhörer Anleitung.pdf".into()),
+            resources: None,
+        },
+        Product {
+            name: "T-Rex Modelle".into(),
+            price: 15.00,
+            image: "t-rex.webp".into(),
+            gender: grammar::Gender::Neutral,
+            number: grammar::Number::Singular,
+            manual: None,
+            resources: Some("downloads/Masse eines Tyrannosaurus Rex Arbeitsblatt.pdf".into()),
+        },
+        Product {
+            name: "Spektrometer".into(),
+            price: 15.00,
+            image: "spektrometer.webp".into(),
+            gender: grammar::Gender::Neutral,
+            number: grammar::Number::Singular,
+            manual: None,
+            resources: None,
+        },
+    ]
+}
+
 #[function_component(ProductsPage)]
 fn products_page() -> Html {
     let modal = use_state(|| None::<Product>);
@@ -91,39 +123,7 @@ fn products_page() -> Html {
         Callback::from(move |_| selected.set(None))
     };
 
-    let products = use_memo((), |_| {
-        vec![
-            Product {
-                name: "Kopfhörer".into(),
-                price: 79.10,
-                image: "earphones.webp".into(),
-                gender: grammar::Gender::Feminine,
-                number: grammar::Number::Plural,
-                manual: Some("downloads/Kopfhörer Anleitung.pdf".to_owned()),
-                resources: None,
-            },
-            Product {
-                name: "T-Rex Modelle".into(),
-                price: 15.00,
-                image: "t-rex.webp".into(),
-                gender: grammar::Gender::Neutral,
-                number: grammar::Number::Singular,
-                manual: None,
-                resources: Some(
-                    "downloads/Masse eines Tyrannosaurus Rex Arbeitsblatt.pdf".to_owned(),
-                ),
-            },
-            Product {
-                name: "Spektrometer".into(),
-                price: 15.00,
-                image: "spektrometer.webp".into(),
-                gender: grammar::Gender::Neutral,
-                number: grammar::Number::Singular,
-                manual: None,
-                resources: None,
-            },
-        ]
-    });
+    let products = product_list();
 
     html! {
         <main>
@@ -173,14 +173,14 @@ fn imprint() -> Html {
               {"Jannes Neufert, Geschäftsführer"}
               </p>
               <h2>{"Anschrift"}</h2>
-              <adress>
+              <address>
               {"AlsterTech"}
               <br/>
               {"Maurepasstraße 67, 24558 Henstedt-Ulzburg"}
               <br/>
               {"E-Mail: "}
               <a href={format!("mailto:{}", EMAIL)}>{EMAIL}</a>
-              </adress>
+              </address>
             </div>
           </div>
         </main>
