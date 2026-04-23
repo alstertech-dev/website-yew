@@ -1,6 +1,4 @@
 {
-  description = "A flake that loads some packages";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
