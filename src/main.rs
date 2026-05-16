@@ -8,11 +8,11 @@ const EMAIL: &str = "alstertech@alstergymnasium.de";
 
 #[derive(Clone, Routable, PartialEq)]
 enum Route {
-    #[at("/")]
+    #[at("/website-yew/")]
     Home,
-    #[at("/products")]
+    #[at("/website-yew/products")]
     Products,
-    #[at("/imprint")]
+    #[at("/website-yew/imprint")]
     Imprint,
 }
 
